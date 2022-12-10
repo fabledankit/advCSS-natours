@@ -1,0 +1,60 @@
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin absCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+//MEDEA QUERY MANAGER
+
+/*
+
+0-600px       Phone
+600-900px     Tablet
+900-1200px    Tablet-Landscape
+1200-1800px   default css applies
+1800px +      Big-Desktop
+
+$breakpoint argument choices
+- phone
+- tabs
+- tabs-portrait
+- big-desktop
+
+ORDER: Base -> typography -> grneral layout + grid -> page layout -> components.
+
+*/
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media (max-width: 37.5em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tab-port {
+    @media (max-width: 56.25em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tab-land {
+    @media (max-width: 75em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == big-desktop {
+    @media (min-width: 112.5em) {
+      @content;
+    }
+  }
+}
